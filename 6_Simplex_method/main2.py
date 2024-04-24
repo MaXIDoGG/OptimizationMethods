@@ -77,7 +77,7 @@ def simplex(c, A, b):
         pivot_position = get_pivot_position(tableau)
         tableau = pivot_step(tableau, pivot_position)
         # print('\n'.join(['\t'.join([str(cell) for cell in row]) for row in tableau]),'\n')
-        s = [[str(e) for e in row] for row in tableau]
+        s = [[str(round(e, 3)) for e in row] for row in tableau]
         lens = [max(map(len, col)) for col in zip(*s)]
         fmt = "\t".join("{{:{}}}".format(x) for x in lens)
         table = [fmt.format(*row) for row in s]

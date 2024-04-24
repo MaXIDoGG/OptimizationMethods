@@ -131,10 +131,10 @@ def dual_simplex(c, A, b):
     return get_solution(tableau)
 
 
-c = [14, 10, -10, 35, 3]
+c = [14, 10, -10, 35, 3, 0, 0]
 A = [[-1, -1, 5, -5, 1, 1, 0], [-2, -1, 2, 7, -1, 0, 1]]
 
-b = [-5, -1]
+b = [-2, -5]
 
 dual = dual_simplex(c, A, b)
 print("Dual: ", dual)

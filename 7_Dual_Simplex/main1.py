@@ -40,60 +40,6 @@ def get_solution(tableau):
     return solutions
 
 
-# def can_be_improved_for_dual(tableau):
-#     rhs_entries = [row[-1] for row in tableau[:-1]]
-#     return any([entry < 0 for entry in rhs_entries])
-
-
-# def get_pivot_position_for_dual(tableau):
-#     rhs_entries = [row[-1] for row in tableau[:-1]]
-#     min_rhs_value = min(rhs_entries)
-#     row = rhs_entries.index(min_rhs_value)
-
-#     columns = []
-#     for index, element in enumerate(tableau[row][:-1]):
-#         if element < 0:
-#             columns.append(index)
-#     columns_values = [tableau[row][c] / tableau[-1][c] for c in columns]
-#     column_min_index = columns_values.index(min(columns_values))
-#     column = columns[column_min_index]
-
-#     return row, column
-
-
-# def dual_simplex(c, A, b):
-#     tableau = to_tableau(c, A, b)
-#     print("\n".join(["\t".join([str(cell) for cell in row]) for row in tableau]), "\n")
-
-#     while can_be_improved_for_dual(tableau):
-#         pivot_position = get_pivot_position_for_dual(tableau)
-#         tableau = pivot_step(tableau, pivot_position)
-#         s = [[str(e) for e in row] for row in tableau]
-#         lens = [max(map(len, col)) for col in zip(*s)]
-#         fmt = "\t".join("{{:{}}}".format(x) for x in lens)
-#         table = [fmt.format(*row) for row in s]
-#         print("\n".join(table), "\n")
-
-#     return get_solution(tableau)
-
-
-# c = [-5, -1, 0, 0, 0, 0, 0]
-# A = [
-#     [-1, -2, 1, 0, 0, 0, 0],
-#     [-1, -1, 0, 1, 0, 0, 0],
-#     [5, 2, 0, 0, 1, 0, 0],
-#     [-5, 7, 0, 0, 0, 1, 0],
-#     [1, -1, 0, 0, 0, 0, 1],
-# ]
-# b = [-14, -10, 10, -35, -3]
-
-# dual = dual_simplex(c, A, b)
-# print("Dual: ", dual)
-
-
-##################
-
-
 def can_be_improved_for_dual(tableau):
     rhs_entries = [row[-1] for row in tableau[:-1]]
     return any([entry < 0 for entry in rhs_entries])
