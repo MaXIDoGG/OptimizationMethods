@@ -17,7 +17,7 @@ x02 = [-1.2, 1]
 
 def argmin(f, x0, S):
     delta = EPS/1000
-    a, b = -10, 10
+    a, b = -1, 1
 
     x1 = (a + b - delta) / 2
     x2 = (a + b + delta) / 2
@@ -31,10 +31,6 @@ def argmin(f, x0, S):
         x2 = (a + b + delta) / 2
 
     return (x1 + x2)/2
-
-# def funcOfFunc(x):
-#     return 10 * pow((x + y - 10), 2) + pow((x - y + 4), 2)
-
 
 def gradient(f, x0):
     u = sp.IndexedBase('u')
@@ -61,13 +57,16 @@ def Broyden(f, X0: list[float]):
     acc = 100            # текущая точность
     curGrad = np.array(gradient(f, lastX)) # текущий градиент
     i = 0
+    S = Nu0 * (curGrad)        # считаем направление
+    S = S.diagonal()
     
     # Цикл пока не достигнем нужной точности
     while acc > EPS:
         i += 1
         lastGrad = curGrad.copy() # обновляем градиент
-        S = Nu0* lastGrad         # считаем направление
-        S = S.diagonal()
+        if i % 2 == 0:
+            S = Nu0 * (lastGrad)        # считаем направление
+            S = S.diagonal()
         lamb = argmin(f, lastX, S)
         curX = lastX - lamb * S
 
@@ -97,7 +96,7 @@ def Broyden(f, X0: list[float]):
     return curX
 
 Broyden(f1, x01)
-# Broyden(f2, x02)
+Broyden(f2, x02)
 
 
 
