@@ -18,7 +18,7 @@ x_old = [0, 0]
 i = 1
 r = 1
 b = 0.2
-eps = 0.001
+eps = 0.0001
 while i < 1000:
     table.add_row([i, r, x_c[0], x_c[1], rz(x_c), abs(rz(x_c) - rz(x_old))])
     x_old = x_c
