@@ -4,10 +4,12 @@ from collections import deque
 
 class Graph:
     def __init__(self, graph, nodes):
+        # Инициализация графа и списка узлов
         self.graph = graph
         self.nodes = nodes
 
     def bfs(self, s, t, parent):
+        # Поиск в ширину для проверки наличия пути от истока к стоку
         visited = [False] * len(self.graph)
         queue = deque([s])
         visited[s] = True
@@ -24,10 +26,12 @@ class Graph:
         return False
 
     def ford_fulkerson(self, source, sink):
+        # Алгоритм Форда-Фалкерсона для поиска максимального потока
         parent = [-1] * len(self.graph)
         max_flow = 0
 
         while self.bfs(source, sink, parent):
+            # Находим максимальный поток в найденном пути
             path_flow = float("inf")
             s = sink
             while s != source:
@@ -36,6 +40,7 @@ class Graph:
 
             max_flow += path_flow
 
+            # Обновляем граф, уменьшая пропускную способность на найденном пути и увеличивая обратно
             v = sink
             while v != source:
                 u = parent[v]
@@ -43,6 +48,7 @@ class Graph:
                 self.graph[v][u] += path_flow
                 v = parent[v]
 
+            # Выводим текущее распределение потока
             print("Распределение потока:")
             headers = [""] + [f"P{i}" for i in self.nodes]
             rows = [[f"P{i}"] + row for i, row in enumerate(self.graph)]
